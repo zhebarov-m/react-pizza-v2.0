@@ -1,0 +1,7 @@
+.pizzaCard img {
+  transition: all 0.3s ease-in-out;
+}
+
+.pizzaCard img:hover {
+  transform: scale(1.04);
+}

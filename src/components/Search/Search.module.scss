@@ -1,0 +1,53 @@
+.inputContainer {
+  position: relative;
+
+  .inputStyles {
+    display: inline-block;
+    width: 450px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #ffdf8c;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: background-color 0.3s;
+  }
+
+  .inputStyles:focus {
+    background-color: #f37543;
+    color: black;
+  }
+
+  .inputStyles::placeholder {
+    color: black;
+    opacity: 0.7;
+  }
+  .inputStyles:focus::placeholder {
+    color: rgb(255, 255, 255);
+    opacity: 0.7;
+  }
+
+  .inputStyles:-ms-input-placeholder {
+    color: #fff;
+    opacity: 0.7;
+  }
+
+  .inputStyles::-ms-input-placeholder {
+    color: #fff;
+    opacity: 0.7;
+  }
+
+  .clearCrossIcon {
+    position: absolute;
+    top: 14px;
+    right: 12px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+      color: #ffdf8c;
+    }
+  }
+}

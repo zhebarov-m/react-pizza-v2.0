@@ -1,0 +1,8 @@
+.triangleSortIcon {
+    font-size: 22px;
+    transition: all .3s;
+}
+
+.rotateIcon {
+    transform: rotate(180deg);
+}

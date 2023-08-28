@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 
-function MainLayout() {
+const MainLayout: React.FC = () => {
   return (
     <>
       <Outlet />
     </>
   );
-}
+};
 
 export default MainLayout;

@@ -1,11 +1,25 @@
 import { useState } from "react";
-import styles from "./PizzaCard.module.css";
+import styles from "./PizzaCard.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../../redux/slices/cartSlice";
+import { addItem, tCartItem } from "../../redux/slices/cartSlice";
+import { RootState } from "../../redux/store";
+import { Link } from "react-router-dom";
 
-function PizzaCard(props) {
+const nameTypes = ["тонкое", "традиционное"];
+
+type tPizzaCardProps = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+  rating: number;
+};
+
+const PizzaCard: React.FC<tPizzaCardProps> = (props) => {
   const { id, title, price, imageUrl, sizes, types } = props;
-  const cartItem = useSelector((state) =>
+  const cartItem = useSelector((state: RootState) =>
     state.cart.items.find((pizza) => pizza.id === id)
   );
   const dispatch = useDispatch();
@@ -15,24 +29,25 @@ function PizzaCard(props) {
   const addedPizza = cartItem ? cartItem.count : 0;
 
   const handlerAddButtonClick = () => {
-    const item = {
+    const item: tCartItem = {
       id,
       title,
       price,
       imageUrl,
-      type: activeType,
-      size: activeSize,
+      type: nameTypes[activeType],
+      size: sizes[activeSize],
+      count: 0,
     };
     dispatch(addItem(item));
   };
 
-  const nameTypes = ["тонкое", "традиционное"];
-
   return (
     <div className={`pizza-block-wrapper ${styles.pizzaCard}`}>
       <div className="pizza-block">
-        <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
-        <h4 className="pizza-block__title">{title}</h4>
+        <Link to={`/pizza/${id}`}>
+          <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+          <h4 className="pizza-block__title">{title}</h4>
+        </Link>
         <div className="pizza-block__selector">
           <ul>
             {types.map((type, id) => (
@@ -82,6 +97,6 @@ function PizzaCard(props) {
       </div>
     </div>
   );
-}
+};
 
 export default PizzaCard;

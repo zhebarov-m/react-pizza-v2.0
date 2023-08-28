@@ -1,34 +1,34 @@
 import styles from "./Search.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchValue } from "../../redux/slices/searchSlice";
-import { useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { LuUtensilsCrossed } from "react-icons/lu";
 import debounce from "lodash.debounce";
 
-function Search() {
-  const [inputValue, setInputValue] = useState('')
+const Search: React.FC = () => {
+  const [inputValue, setInputValue] = useState("");
   // const searchValue = useSelector((state) => state.search.searchValue);
   const dispatch = useDispatch();
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClickClear = () => {
     dispatch(setSearchValue(""));
-    setInputValue('')
-    inputRef.current.focus();
+    setInputValue("");
+    inputRef.current?.focus();
   };
 
   const testDebounce = useCallback(
-    debounce((inputQuery) => {
-      dispatch(setSearchValue(inputQuery))
+    debounce((inputQuery: string) => {
+      dispatch(setSearchValue(inputQuery));
     }, 1000),
     []
   );
 
-  const onChangeInput = (event) => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setInputValue(value)
-    testDebounce(value)
-  }
+    setInputValue(value);
+    testDebounce(value);
+  };
 
   return (
     <div className={styles.inputContainer}>
@@ -48,6 +48,6 @@ function Search() {
       )}
     </div>
   );
-}
+};
 
 export default Search;

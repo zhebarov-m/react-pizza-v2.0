@@ -1,33 +1,36 @@
 import React, { useEffect, useRef, useState } from "react";
 import { RxTriangleUp } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
-import { setSortType } from "../redux/slices/filterSlice";
-import styles from "./Sort.module.css";
+import { setSortType, tSort } from "../redux/slices/filterSlice";
+import styles from "./Sort.module.scss";
+import { RootState } from "../redux/store";
 
-export const popupList = [
+export const popupList: tSort[] = [
   { name: "популярности", sort: "rating" },
   { name: "цене", sort: "price" },
   { name: "алфавиту", sort: "title" },
 ];
-function Sort() {
-  const sortRef = useRef();
+const Sort: React.FC = () => {
+  const sortRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const sortType = useSelector((state) => state.filter.sortType);
+  const sortType = useSelector((state: RootState) => state.filter.sortType);
   const dispatch = useDispatch();
 
-  const handleSelectedItem = (sort) => {
+  const handleSelectedItem = (sort: tSort) => {
     dispatch(setSortType(sort));
     setIsVisible(false);
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event.composedPath().includes(sortRef.current)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
         setIsVisible(false);
       }
     };
     document.body.addEventListener("click", handleClickOutside);
-
+    document.body.addEventListener('click', e => {
+      
+    })
     return () => document.body.removeEventListener("click", handleClickOutside);
   }, []);
   return (
@@ -62,6 +65,6 @@ function Sort() {
       )}
     </div>
   );
-}
+};
 
 export default Sort;

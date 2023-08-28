@@ -1,11 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setCategoryId } from "../redux/slices/filterSlice";
+import { RootState } from "../redux/store";
 
-function Categories() {
-  const categoryId = useSelector((state) => state.filter.categoryId);
+
+
+const Categories:React.FC = () => {
+  const categoryId = useSelector((state: RootState) => state.filter.categoryId);
   const dispatch = useDispatch();
 
-  const hundlerClickCategory = (index) => dispatch(setCategoryId(index));
+  const hundlerClickCategory = (index:number) => dispatch(setCategoryId(index));
 
   const categories = [
     "Все",

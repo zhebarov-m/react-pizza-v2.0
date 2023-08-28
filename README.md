@@ -1,3 +1,9 @@
+# 🍕 React-Pizza-v2.0
+<hr>
+
+<h3>Проект, который я делал для первых шагов в изучении React-библиотеки. Помог в осознании некоторых вещей, но, конечно, на этом я не остановился.</h3>
+<hr>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
